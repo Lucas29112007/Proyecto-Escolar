@@ -1,0 +1,187 @@
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#a8d8e6;
+}
+
+/* CABECERA */
+
+.barra-superior{
+
+    width:98%;
+
+    height:80px;
+
+    margin:10px auto 25px auto;
+
+    border:5px solid black;
+
+    background:#4045d9;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.barra-superior h1{
+
+    color:white;
+
+    font-weight:normal;
+}
+
+/* CARGOS */
+
+.cargo{
+
+    width:94%;
+
+    margin:auto;
+
+    margin-bottom:35px;
+}
+
+/* FRANJA AZUL */
+
+.titulo-cargo{
+
+    background:#14a0df;
+
+    min-height:60px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    font-size:28px;
+}
+
+/* BOTONES DEL ROL */
+
+.acciones{
+
+    display:flex;
+
+    gap:10px;
+}
+
+.acciones a{
+
+    background:white;
+
+    border:2px solid black;
+
+    padding:6px 12px;
+
+    text-decoration:none;
+
+    color:black;
+
+    font-size:16px;
+}
+
+.acciones a:hover{
+
+    background:#efefef;
+}
+
+/* MIEMBRO */
+
+.miembro{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:40px;
+
+    padding:18px 0 0 55px;
+}
+
+.foto-perfil{
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.nombre-miembro{
+
+    font-size:30px;
+}
+
+/* SUMAR ROL */
+
+.sumar-rol{
+
+    background:#14a0df;
+
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:black;
+
+    font-size:28px;
+}
+
+.sumar-rol:hover{
+
+    background:#22ace8;
+}
+
+/* BOTÓN VOLVER */
+
+.boton-volver{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    background:#4045d9;
+
+    color:white;
+
+    text-decoration:none;
+
+    border:4px solid black;
+
+    border-radius:10px;
+
+    padding:12px 25px;
+
+    font-size:22px;
+}
+
+.boton-volver:hover{
+
+    opacity:0.9;
+}

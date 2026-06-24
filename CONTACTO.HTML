@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>E.E.S.T Nº3 Islas Malvinas</title>
+<link rel="preload" as="image" href="logon3.png">
+<link rel="stylesheet" href="hi.css">
+</head>
+<body>
+
+ <header>
+    <div class="container header-container">
+      <div class="brand">
+<img src="logon3.png" width="120" height="120" loading="eager" decoding="sync" fetchpriority="high" alt="Logo del colegio" class="logo">
+      <h1>E.E.S.T Nº3 "Islas Malvinas"</h1>
+</div>
+        <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="galeria.html">Galería</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="CONTACTO.HTML" class="is-active">Contacto</a></li>
+                    <li><a href="d1.html">Centro de Estudiantes</a></li>
+                </ul>
+            </nav>
+    </div>
+  </header>
+<!-- CONTACTO -->
+    <section id="contacto" class="section no-hover">
+      <div class="container">
+        <h2>Contacto</h2>
+        <form onsubmit="return validarFormulario()">
+          <input type="text" id="nombre" placeholder="Tu nombre" required>
+          <input type="email" id="email" placeholder="Tu correo" required>
+          <textarea id="mensaje" placeholder="Escribí tu mensaje aquí..." required></textarea>
+          <button type="submit">Enviar</button>
+          <p id="respuesta"></p>
+        </form>
+        <p><strong>Dirección:</strong> Acevedo 2778, Remedios de Escalada, Lanús</p>
+        <p><strong>Teléfono:</strong> (42483115)</p>
+        <p><strong>Email:</strong> (tecnica3lanus@abc.gob.ar)</p>
+      </div>
+    </section>
+<script src="ui.js"></script>
+</body>
+</html>

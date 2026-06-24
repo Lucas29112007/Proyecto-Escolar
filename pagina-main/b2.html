@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes Recibidos</title>
+    <link rel="stylesheet" href="b2.css">
+</head>
+<body>
+
+    <header class="barra-superior">
+        <nav class="navegacion">
+            <a href="a1.html">Miembros</a>
+            <a href="b1.html">Sugerencias</a>
+            <a href="b2.html">Mensajes</a>
+            <a href="c1.html">Novedades</a>
+            <a href="d1.html">Presentación</a>
+        </nav>
+    </header>
+
+    <h1 class="titulo-pagina">Sugerencias Recibidas</h1>
+
+    <section id="contenedorMensajes"></section>
+
+    <script>
+
+        const contenedor =
+            document.getElementById("contenedorMensajes");
+
+        const mensajes =
+            JSON.parse(
+                localStorage.getItem("mensajes")
+            ) || [];
+
+        if(mensajes.length === 0){
+
+            contenedor.innerHTML =
+                "<p class='vacio'>No hay sugerencias registradas.</p>";
+
+        }else{
+
+            mensajes.forEach((m)=>{
+
+                contenedor.innerHTML += `
+
+                <article class="tarjeta">
+
+                    <div class="vista-previa">
+                        <h2>${m.titulo}</h2>
+                        <span>${m.fecha}</span>
+                    </div>
+
+                    <div class="contenido">
+                        <h2>${m.titulo}</h2>
+                        <p>${m.mensaje}</p>
+                        <span>${m.fecha}</span>
+                    </div>
+
+                </article>
+
+                `;
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
