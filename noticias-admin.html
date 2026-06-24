@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar noticias - E.E.S.T N&ordm;3 Islas Malvinas</title>
+    <link rel="preload" as="image" href="logon3.png">
+    <link rel="stylesheet" href="hi.css">
+    <style>
+        body.news-admin-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.news-admin-page main {
+            flex: 1;
+            display: block;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 28px 0 18px;
+        }
+
+        .admin-shell {
+            width: min(calc(100% - 24px), 1520px);
+            margin: 0 auto 24px;
+            padding: 18px;
+            background: rgba(245, 248, 252, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 12px;
+            box-shadow: 0 16px 36px rgba(10, 24, 40, 0.16);
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-shell:hover {
+            transform: none;
+        }
+
+        .admin-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 18px;
+            margin-bottom: 14px;
+        }
+
+        .admin-topbar h2 {
+            margin: 0;
+            font-size: clamp(1.75rem, 3vw, 2.45rem);
+            text-align: left;
+        }
+
+        .admin-topbar p {
+            margin: 8px 0 0;
+            text-align: left;
+        }
+
+        .admin-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .admin-button {
+            border: 0;
+            border-radius: 999px;
+            padding: 10px 15px;
+            background: var(--accent-blue);
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .admin-button:hover {
+            transform: translateY(-1px);
+            background: var(--accent-gold);
+            color: #132338;
+        }
+
+        .admin-button.secondary {
+            background: #e7edf3;
+            color: var(--accent-blue);
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(min(100%, 340px), 420px);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .admin-list,
+        .admin-form {
+            border: 8px double var(--accent-blue);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 20px 45px rgba(10, 24, 40, 0.2);
+            overflow: hidden;
+        }
+
+        .admin-list-header,
+        .admin-form-header {
+            padding: 14px 18px;
+            border-bottom: 5px double rgba(16, 59, 102, 0.5);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 245, 250, 0.92));
+        }
+
+        .admin-list-header h3,
+        .admin-form-header h3 {
+            margin: 0;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent-gold);
+            color: var(--accent-blue);
+        }
+
+        #adminList {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        }
+
+        .news-admin-item {
+            display: grid;
+            grid-template-rows: clamp(120px, 18vw, 160px) auto;
+            min-height: 0;
+            padding: 0;
+            border-right: 5px double rgba(16, 59, 102, 0.72);
+            border-bottom: 5px double rgba(16, 59, 102, 0.72);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(240, 245, 250, 0.92));
+            transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+        }
+
+        .news-admin-item:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(250, 239, 210, 0.92));
+            box-shadow: 0 14px 28px rgba(10, 24, 40, 0.16);
+            z-index: 1;
+        }
+
+        .news-admin-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: rgba(16, 59, 102, 0.08);
+        }
+
+        .news-admin-item > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 14px;
+        }
+
+        .news-admin-item h4 {
+            margin: 0 0 6px;
+            color: var(--accent-blue);
+            font-size: 1rem;
+            line-height: 1.25;
+        }
+
+        .news-admin-item p {
+            margin: 0 0 10px;
+            display: -webkit-box;
+            overflow: hidden;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: left;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            margin-bottom: 8px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: rgba(56, 142, 60, 0.12);
+            color: #286b2d;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .status.is-hidden {
+            background: rgba(180, 48, 38, 0.1);
+            color: #9c2c24;
+        }
+
+        .item-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .item-actions button {
+            border: 0;
+            border-radius: 999px;
+            padding: 8px 10px;
+            background: #e7edf3;
+            color: var(--accent-blue);
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .item-actions .danger {
+            background: #f5d7d3;
+            color: #9c2c24;
+        }
+
+        .admin-form form {
+            display: grid;
+            gap: 12px;
+            padding: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(240, 245, 250, 0.86));
+        }
+
+        .field {
+            display: grid;
+            gap: 6px;
+        }
+
+        .field label {
+            color: var(--accent-blue);
+            font-weight: 800;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 11px;
+            border: 3px solid rgba(16, 59, 102, 0.2);
+            border-radius: 10px;
+            font: inherit;
+        }
+
+        .field textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .checkbox-field {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: var(--accent-blue);
+            font-weight: 800;
+        }
+
+        .checkbox-field input {
+            width: auto;
+        }
+
+        .form-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .form-buttons button {
+            flex: 1 1 150px;
+        }
+
+        .empty-admin {
+            padding: 24px 20px;
+            color: var(--ink-soft);
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 900px) {
+            body.news-admin-page main {
+                padding: 18px 0 8px;
+            }
+
+            .admin-shell {
+                padding: 14px;
+            }
+
+            .admin-topbar {
+                display: block;
+            }
+
+            .admin-actions {
+                justify-content: flex-start;
+                margin-top: 12px;
+            }
+
+            .admin-button {
+                flex: 1 1 160px;
+                text-align: center;
+            }
+
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            #adminList {
+                grid-template-columns: 1fr;
+            }
+
+            .news-admin-item {
+                grid-template-rows: clamp(160px, 48vw, 220px) auto;
+                border-right: 0;
+            }
+        }
+    </style>
+</head>
+<body class="news-admin-page">
+    <header>
+        <div class="container header-container">
+            <div class="brand">
+                <img src="logon3.png" width="120" height="120" loading="eager" decoding="sync" fetchpriority="high" alt="Logo del colegio" class="logo">
+                <h1>E.E.S.T N&ordm;3 "Islas Malvinas"</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="galeria.html">Galer&iacute;a</a></li>
+                    <li><a href="noticias.html" class="is-active">Noticias</a></li>
+                    <li><a href="CONTACTO.HTML">Contacto</a></li>
+                    <li><a href="d1.html">Centro de Estudiantes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="admin-shell">
+            <div class="admin-topbar">
+                <div>
+                    <h2>Administrar noticias</h2>
+                    <p>Agrega, edita, oculta o elimina publicaciones de la pagina publica.</p>
+                </div>
+                <div class="admin-actions">
+                    <a class="admin-button secondary" href="noticias.html">Ver publicadas</a>
+                    <button class="admin-button" id="newPost" type="button">Nueva publicacion</button>
+                    <button class="admin-button secondary" id="logout" type="button">Cerrar sesion</button>
+                </div>
+            </div>
+
+            <div class="admin-layout">
+                <div class="admin-list">
+                    <div class="admin-list-header">
+                        <h3>Publicaciones cargadas</h3>
+                    </div>
+                    <div id="adminList"></div>
+                </div>
+
+                <div class="admin-form">
+                    <div class="admin-form-header">
+                        <h3 id="formTitle">Nueva publicacion</h3>
+                    </div>
+                    <form id="postForm">
+                        <input id="postId" type="hidden">
+                        <div class="field">
+                            <label for="postTitle">Titulo</label>
+                            <input id="postTitle" type="text" required>
+                        </div>
+                        <div class="field">
+                            <label for="postDate">Fecha</label>
+                            <input id="postDate" type="date" required>
+                        </div>
+                        <div class="field">
+                            <label for="postBody">Texto</label>
+                            <textarea id="postBody" required></textarea>
+                        </div>
+                        <div class="field">
+                            <label for="postImage">Imagen</label>
+                            <input id="postImage" type="file" accept="image/*">
+                        </div>
+                        <div class="field">
+                            <label for="postImageUrl">O URL/ruta de imagen</label>
+                            <input id="postImageUrl" type="text" placeholder="vide.png">
+                        </div>
+                        <label class="checkbox-field">
+                            <input id="postPublished" type="checkbox" checked>
+                            Visible en noticias publicadas
+                        </label>
+                        <div class="form-buttons">
+                            <button class="admin-button" type="submit">Guardar</button>
+                            <button class="admin-button secondary" id="resetForm" type="button">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 E.E.S.T N&ordm;3 "Islas Malvinas" - Remedios de Escalada, Lan&uacute;s</p>
+        <p><em>"Ense&ntilde;amos profesiones, inspiramos personas."</em></p>
+    </footer>
+
+    <script>
+        const NEWS_KEY = 'eest3Noticias';
+        const SESSION_KEY = 'eest3NoticiasAdmin';
+
+        const defaultNews = [
+            {
+                id: 'actividades',
+                title: 'Actividades institucionales',
+                date: '2026-06-24',
+                body: 'La escuela comparte nuevas propuestas, encuentros y proyectos que fortalecen la participacion de toda la comunidad educativa.',
+                image: 'vide.png',
+                published: true
+            },
+            {
+                id: 'proyectos',
+                title: 'Proyectos de estudiantes',
+                date: '2026-06-23',
+                body: 'Los cursos avanzan con trabajos practicos, producciones digitales y experiencias que integran saberes tecnicos y creatividad.',
+                image: 'perfil.png',
+                published: true
+            },
+            {
+                id: 'aprendizaje',
+                title: 'Espacios de aprendizaje',
+                date: '2026-06-22',
+                body: 'Las aulas y talleres siguen siendo lugares de encuentro para aprender, experimentar y preparar nuevas actividades escolares.',
+                image: 'ricardito.png',
+                published: true
+            },
+            {
+                id: 'comunidad',
+                title: 'Comunidad Islas Malvinas',
+                date: '2026-06-21',
+                body: 'Docentes y estudiantes impulsan iniciativas que promueven compromiso, companerismo y participacion dentro de la institucion.',
+                image: 'moria.png',
+                published: true
+            }
+        ];
+
+        if (sessionStorage.getItem(SESSION_KEY) !== 'true') {
+            window.location.replace('noticias.html');
+        }
+
+        const readNews = () => {
+            try {
+                const stored = JSON.parse(localStorage.getItem(NEWS_KEY));
+                return Array.isArray(stored) ? stored : defaultNews;
+            } catch {
+                return defaultNews;
+            }
+        };
+
+        const saveNews = (items) => {
+            localStorage.setItem(NEWS_KEY, JSON.stringify(items));
+        };
+
+        const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[char]));
+
+        const adminList = document.getElementById('adminList');
+        const postForm = document.getElementById('postForm');
+        const formTitle = document.getElementById('formTitle');
+        const postId = document.getElementById('postId');
+        const postTitle = document.getElementById('postTitle');
+        const postDate = document.getElementById('postDate');
+        const postBody = document.getElementById('postBody');
+        const postImage = document.getElementById('postImage');
+        const postImageUrl = document.getElementById('postImageUrl');
+        const postPublished = document.getElementById('postPublished');
+
+        const today = () => new Date().toISOString().slice(0, 10);
+
+        const resetEditor = () => {
+            postForm.reset();
+            postId.value = '';
+            postDate.value = today();
+            postPublished.checked = true;
+            formTitle.textContent = 'Nueva publicacion';
+        };
+
+        const renderAdmin = () => {
+            const news = readNews();
+
+            if (!news.length) {
+                adminList.innerHTML = '<div class="empty-admin">No hay publicaciones cargadas.</div>';
+                return;
+            }
+
+            adminList.innerHTML = news.map((item) => `
+                <article class="news-admin-item">
+                    <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}">
+                    <div>
+                        <h4>${escapeHtml(item.title)}</h4>
+                        <span class="status ${item.published ? '' : 'is-hidden'}">${item.published ? 'Publicada' : 'Oculta'}</span>
+                        <p>${escapeHtml(item.body)}</p>
+                        <div class="item-actions">
+                            <button type="button" data-action="edit" data-id="${escapeHtml(item.id)}">Editar</button>
+                            <button type="button" data-action="toggle" data-id="${escapeHtml(item.id)}">${item.published ? 'Ocultar' : 'Publicar'}</button>
+                            <button class="danger" type="button" data-action="delete" data-id="${escapeHtml(item.id)}">Eliminar</button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        };
+
+        const getImageValue = () => new Promise((resolve) => {
+            const file = postImage.files && postImage.files[0];
+            const typedUrl = postImageUrl.value.trim();
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsDataURL(file);
+                return;
+            }
+
+            resolve(typedUrl || 'logon3.png');
+        });
+
+        postForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const news = readNews();
+            const image = await getImageValue();
+            const id = postId.value || `noticia-${Date.now()}`;
+            const updated = {
+                id,
+                title: postTitle.value.trim(),
+                date: postDate.value,
+                body: postBody.value.trim(),
+                image,
+                published: postPublished.checked
+            };
+            const index = news.findIndex((item) => item.id === id);
+
+            if (index >= 0) {
+                news[index] = updated;
+            } else {
+                news.unshift(updated);
+            }
+
+            saveNews(news);
+            resetEditor();
+            renderAdmin();
+        });
+
+        adminList.addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-action]');
+            if (!button) return;
+
+            const news = readNews();
+            const id = button.dataset.id;
+            const action = button.dataset.action;
+            const item = news.find((entry) => entry.id === id);
+
+            if (!item) return;
+
+            if (action === 'edit') {
+                postId.value = item.id;
+                postTitle.value = item.title;
+                postDate.value = item.date;
+                postBody.value = item.body;
+                postImageUrl.value = item.image.startsWith('data:') ? '' : item.image;
+                postPublished.checked = item.published;
+                postImage.value = '';
+                formTitle.textContent = 'Editar publicacion';
+            }
+
+            if (action === 'toggle') {
+                item.published = !item.published;
+                saveNews(news);
+                renderAdmin();
+            }
+
+            if (action === 'delete') {
+                const confirmed = window.confirm('Seguro que queres eliminar esta noticia?');
+                if (!confirmed) return;
+                saveNews(news.filter((entry) => entry.id !== id));
+                resetEditor();
+                renderAdmin();
+            }
+        });
+
+        document.getElementById('newPost').addEventListener('click', resetEditor);
+        document.getElementById('resetForm').addEventListener('click', resetEditor);
+        document.getElementById('logout').addEventListener('click', () => {
+            sessionStorage.removeItem(SESSION_KEY);
+            window.location.replace('noticias.html');
+        });
+
+        resetEditor();
+        renderAdmin();
+    </script>
+</body>
+</html>

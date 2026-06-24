@@ -25,7 +25,7 @@ body {
     font-family: 'Segoe UI', Arial, sans-serif;
     background-image:
         linear-gradient(180deg, rgba(245, 248, 252, 0.24) 0%, rgba(5, 24, 53, 0.12) 52%, rgba(245, 248, 252, 0.22) 100%),
-        url('../Assets/i5swh5ltm8i81.png'); /* imagen de fondo */
+        url('i5swh5ltm8i81.png'); /* imagen de fondo */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
