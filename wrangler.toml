@@ -1,0 +1,9 @@
+name = "tecnica3"
+main = "index.js"
+compatibility_date = "2026-05-26"
+account_id = "3794826fa42c2b9d18a3466a064ee753"
+workers_dev = true
+
+[assets]
+directory = "."
+binding = "ASSETS"
