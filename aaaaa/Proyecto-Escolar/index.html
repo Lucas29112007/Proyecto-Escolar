@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E.E.S.T Nº3 Islas Malvinas</title>
+    <link rel="preload" as="image" href="logon3.png">
+<link rel="stylesheet" href="hi.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+
+            <div class="brand">
+<img src="logon3.png" width="120" height="120" loading="eager" decoding="sync" fetchpriority="high"
+                 alt="Logo del colegio"
+                 class="logo">
+
+            <h1>E.E.S.T Nº3 "Islas Malvinas"</h1>
+</div>
+
+            <nav>
+                <ul class="nav-links">
+
+                    <li>
+                        <a href="index.html" class="is-active">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="galeria.html">
+                            Galería
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="noticias.html">
+                            Noticias
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="CONTACTO.html">
+                            Contacto
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="d1.html">
+                            Centro de Estudiantes
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- CARRUSEL PRINCIPAL -->
+
+    <section id="carrusel">
+
+        <div class="slider">
+
+            <div class="slide active">
+                <a href="https://undav.edu.ar/general/recursos/adjuntos/41340.pdf" target="_blank">
+
+                    <img src="https://www.undav.edu.ar/general/recursos/adjuntos/41341.jpg"
+                         alt="Recurso UNDAV">
+
+                </a>
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/900/300?random=1"
+                     alt="Imagen 1">
+            </div>
+
+            <div class="slide">
+                <img src="https://picsum.photos/900/300?random=2"
+                     alt="Imagen 2">
+            </div>
+
+        </div>
+
+        <button class="prev" onclick="moverSlide(-1)">
+            &#10094;
+        </button>
+
+        <button class="next" onclick="moverSlide(1)">
+            &#10095;
+        </button>
+
+    </section>
+
+    <main>
+
+        <section id="inicio" class="section">
+
+            <div class="container">
+
+                <h2>
+                    Bienvenidos a la E.E.S.T Nº3 "Islas Malvinas"
+                </h2>
+
+                <div class="separador"></div>
+
+                <p>
+                    Bienvenidos a la E.E.S.T Nº3 "Islas Malvinas". Somos una institución pública comprometida con la formación integral de nuestros estudiantes, ubicada en Remedios de Escalada, partido de Lanús. Desde hace años, trabajamos con dedicación y orgullo para ofrecer una educación técnica de excelencia, que combina la enseñanza teórica con la práctica, y que prepara a nuestros jóvenes para afrontar los desafíos del presente y del futuro con compromiso, creatividad y responsabilidad.
+                </p>
+
+                <p>
+                    En nuestra escuela formamos personas antes que profesionales. Buscamos que cada estudiante descubra sus talentos, desarrolle su pensamiento crítico y adquiera las herramientas necesarias para desenvolverse tanto en el ámbito académico como en el mundo del trabajo. Promovemos el trabajo en equipo, el respeto, la solidaridad y la innovación como pilares fundamentales de la educación técnica.
+                </p>
+
+                <p>
+                    La E.E.S.T Nº3 es mucho más que un edificio con talleres: es una comunidad educativa viva, donde cada proyecto, cada clase y cada experiencia contribuyen a formar ciudadanos responsables y técnicos competentes. Contamos con docentes comprometidos, equipamiento en constante actualización y una fuerte conexión con el entorno social y productivo de nuestra región.
+                </p>
+
+                <p>
+                    Creemos en una educación que transforma, que abre puertas, que inspira y que da oportunidades reales. Por eso, seguimos apostando al conocimiento, al esfuerzo y a los valores humanos que hacen grande a nuestra escuela.
+                </p>
+
+                <blockquote>
+                    “Educando con compromiso, construyendo futuro.”
+                </blockquote>
+
+            </div>
+
+        </section>
+
+        <section id="propuesta" class="section">
+
+            <div class="container">
+
+                <h2>Nuestra Propuesta Educativa</h2>
+
+                <div class="separador"></div>
+
+                <div class="card-container">
+
+                    <div class="card-v2"
+                         onclick="location.href='informatica.html'">
+
+                        <div class="card-v2-head">
+                            <span class="card-v2-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="12" rx="1.2" stroke="currentColor" stroke-width="1.6"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                            </span>
+                            <h3>Técnico en Informática<br>Personal y Profesional</h3>
+                        </div>
+                        <div class="card-v2-body">
+                            <p>Desarrollo de software, hardware, redes y servicios IT.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="card-v2"
+                         onclick="location.href='construcciones.html'">
+
+                        <div class="card-v2-head">
+                            <span class="card-v2-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 21V10l8-5 8 5v11" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                            </span>
+                            <h3>Maestro Mayor<br>de Obras</h3>
+                        </div>
+                        <div class="card-v2-body">
+                            <p>Diseño, planificación y dirección técnica de proyectos edilicios.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="card-v2"
+                         onclick="location.href='turismo.html'">
+
+                        <div class="card-v2-head">
+                            <span class="card-v2-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg>
+                            </span>
+                            <h3>Técnico en Turismo</h3>
+                        </div>
+                        <div class="card-v2-body">
+                            <p>Gestión turística, patrimonio cultural y atención al viajero.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <style>
+                    .card-v2 {
+                        background: #fff;
+                        border: 1.5px solid var(--accent-blue);
+                        border-radius: 14px;
+                        overflow: hidden;
+                        cursor: pointer;
+                        transition: transform 0.25s ease, box-shadow 0.25s ease;
+                        box-shadow: 0 6px 18px rgba(10,24,40,0.08);
+                    }
+                    .card-v2:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 14px 26px rgba(10,24,40,0.14);
+                    }
+                    .card-v2-head {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 16px 18px;
+                        border-bottom: 1.5px solid var(--accent-blue);
+                        min-height: 64px;
+                        overflow: hidden;
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cg fill='none' stroke='%23103b66' stroke-opacity='0.18' stroke-width='1.5'%3E%3Cpolygon points='35,2 65,2 80,28 65,54 35,54 20,28'/%3E%3Cpolygon points='70,40 100,40 115,66 100,92 70,92 55,66'/%3E%3C/g%3E%3C/svg%3E");
+                        background-repeat: no-repeat;
+                        background-position: right -10px bottom -20px;
+                        background-size: 110px;
+                    }
+                    .card-v2-icon {
+                        flex: 0 0 38px;
+                        width: 38px;
+                        height: 38px;
+                        border-radius: 50%;
+                        border: 1.6px solid var(--accent-gold);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: var(--accent-gold);
+                        background: #fff;
+                        position: relative;
+                        z-index: 1;
+                    }
+                    .card-v2-icon svg { width: 20px; height: 20px; }
+                    .card-v2-head h3 {
+                        margin: 0;
+                        border-left: none;
+                        padding-left: 0;
+                        font-family: var(--heading-font);
+                        font-weight: 700;
+                        color: var(--accent-blue);
+                        font-size: 1.05rem;
+                        line-height: 1.3;
+                        position: relative;
+                        z-index: 1;
+                    }
+                    .card-v2-body {
+                        position: relative;
+                        padding: 18px 20px 22px;
+                        overflow: hidden;
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Cg fill='none' stroke='%23caa24a' stroke-opacity='0.35' stroke-width='1.5'%3E%3Cpolygon points='35,2 65,2 80,28 65,54 35,54 20,28'/%3E%3Cpolygon points='70,40 100,40 115,66 100,92 70,92 55,66'/%3E%3Cpolygon points='0,55 30,55 45,81 30,107 0,107 -15,81'/%3E%3C/g%3E%3C/svg%3E");
+                        background-repeat: no-repeat;
+                        background-position: right -10px bottom -15px;
+                        background-size: 120px;
+                    }
+                    .card-v2-body p {
+                        margin: 0;
+                        position: relative;
+                        z-index: 1;
+                        text-align: justify;
+                        color: #5a6878;
+                        font-size: 0.95rem;
+                        line-height: 1.55;
+                    }
+                </style>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            &copy; 2025 E.E.S.T Nº3 "Islas Malvinas" — Remedios de Escalada, Lanús
+        </p>
+
+        <p>
+            <em>
+                "Enseñamos profesiones, inspiramos personas."
+            </em>
+        </p>
+
+        <p class="footer-credit">
+            Hecha con <span class="heart">♥</span> por los cursos de informática 2025-actualidad
+        </p>
+
+    </footer>
+
+    <script>
+
+        let indice = 0;
+
+        const slides = document.querySelectorAll('.slide');
+
+        function mostrarSlide(n){
+
+            slides.forEach(
+                slide => slide.classList.remove('active')
+            );
+
+            indice = (n + slides.length) % slides.length;
+
+            slides[indice].classList.add('active');
+        }
+
+        function moverSlide(n){
+
+            mostrarSlide(indice + n);
+        }
+
+        setInterval(() => moverSlide(1), 5000);
+
+    </script>
+
+    <script src="ui.js"></script>
+
+</body>
+</html>

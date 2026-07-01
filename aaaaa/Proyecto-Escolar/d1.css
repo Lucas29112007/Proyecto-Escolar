@@ -1,0 +1,169 @@
+/* ==========================
+   CONTENEDOR PRINCIPAL
+========================== */
+
+main{
+
+    max-width:1200px;
+
+    margin:40px auto;
+
+    padding:0 20px;
+}
+
+/* ==========================
+   TARJETA PRINCIPAL
+========================== */
+
+.presentacion-container{
+
+    background:
+    rgba(255,255,255,0.78);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.35);
+
+    border-radius:18px;
+
+    padding:50px;
+
+    box-shadow:
+    0 12px 30px rgba(10,24,40,0.15);
+}
+
+/* ==========================
+   TITULO
+========================== */
+
+#titulo-lista{
+
+    text-align:center;
+
+    color:#103b66;
+
+    font-size:3rem;
+
+    margin-bottom:10px;
+
+    font-family:"Palatino Linotype",
+                "Book Antiqua",
+                Georgia,
+                serif;
+}
+
+/* ==========================
+   SUBTITULO
+========================== */
+
+#subtitulo-lista{
+
+    text-align:center;
+
+    color:#174a7a;
+
+    font-size:1.4rem;
+
+    font-weight:500;
+
+    margin-bottom:40px;
+}
+
+/* ==========================
+   TEXTO
+========================== */
+
+#texto-presentacion{
+
+    max-width:900px;
+
+    margin:auto;
+}
+
+#texto-presentacion p{
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+
+    text-align:justify;
+
+    color:#243747;
+
+    margin-bottom:22px;
+}
+
+/* ==========================
+   BOTON EDITAR
+========================== */
+
+.contenedor-editor{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:40px;
+}
+
+.boton-editor{
+
+    text-decoration:none;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #103b66,
+        #174a7a
+    );
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.boton-editor:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(16,59,102,0.25);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .presentacion-container{
+
+        padding:25px;
+    }
+
+    #titulo-lista{
+
+        font-size:2rem;
+    }
+
+    #subtitulo-lista{
+
+        font-size:1.1rem;
+    }
+
+    #texto-presentacion p{
+
+        font-size:1rem;
+    }
+
+    .contenedor-editor{
+
+        justify-content:center;
+    }
+}

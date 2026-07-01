@@ -1,0 +1,254 @@
+/* ==========================
+   CONTENIDO PRINCIPAL
+========================== */
+
+main{
+
+    max-width:1200px;
+
+    margin:40px auto;
+
+    padding:0 20px;
+}
+
+/* ==========================
+   FORMULARIO
+========================== */
+
+.contenedor-formulario{
+
+    background:
+    rgba(255,255,255,0.78);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.35);
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:
+    0 12px 30px rgba(10,24,40,0.15);
+
+    margin-bottom:30px;
+}
+
+/* ==========================
+   TITULO
+========================== */
+
+.titulo{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    border:none;
+
+    border-bottom:2px solid rgba(16,59,102,0.25);
+
+    background:transparent;
+
+    padding:15px;
+
+    font-size:24px;
+
+    color:#103b66;
+
+    outline:none;
+}
+
+.titulo::placeholder{
+
+    color:#6d7c8d;
+}
+
+/* ==========================
+   MENSAJE
+========================== */
+
+.mensaje{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    height:260px;
+
+    margin-top:20px;
+
+    border:1px solid rgba(16,59,102,0.15);
+
+    border-radius:12px;
+
+    background:
+    rgba(255,255,255,0.65);
+
+    padding:18px;
+
+    font-size:17px;
+
+    resize:none;
+
+    outline:none;
+
+    color:#243747;
+}
+
+.mensaje::placeholder{
+
+    color:#6d7c8d;
+}
+
+/* ==========================
+   BOTONES
+========================== */
+
+.botones{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+#enviar{
+
+    background:
+    linear-gradient(
+        135deg,
+        #103b66,
+        #174a7a
+    );
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+#enviar:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(16,59,102,0.25);
+}
+
+#borrar{
+
+    background:
+    rgba(255,255,255,0.8);
+
+    color:#103b66;
+
+    border:1px solid rgba(16,59,102,0.2);
+
+    padding:12px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+#borrar:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(10,24,40,0.12);
+}
+
+/* ==========================
+   MENSAJES ENVIADOS
+========================== */
+
+.mensaje-enviado{
+
+    background:
+    rgba(255,255,255,0.78);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:16px;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+    0 8px 22px rgba(10,24,40,0.12);
+
+    border:1px solid rgba(255,255,255,0.35);
+}
+
+.mensaje-enviado h2{
+
+    color:#103b66;
+
+    margin-top:0;
+
+    margin-bottom:12px;
+}
+
+.mensaje-enviado p{
+
+    color:#243747;
+
+    line-height:1.7;
+}
+
+.mensaje-enviado span{
+
+    display:block;
+
+    margin-top:15px;
+
+    font-size:14px;
+
+    color:#6d7c8d;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .contenedor-formulario{
+
+        padding:20px;
+    }
+
+    .titulo{
+
+        font-size:20px;
+    }
+
+    .mensaje{
+
+        height:220px;
+    }
+
+    .botones{
+
+        justify-content:center;
+    }
+}

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - E.E.S.T N&ordm;3 Islas Malvinas</title>
+    <link rel="preload" as="image" href="logon3.png">
+    <link rel="stylesheet" href="hi.css">
+    <style>
+        body.news-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.news-page main {
+            flex: 1;
+            display: block;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 28px 0 18px;
+        }
+
+        .news-shell {
+            width: min(calc(100% - 24px), 1220px);
+            margin: 0 auto 24px;
+            padding: 20px;
+            background: rgba(245, 248, 252, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 12px;
+            box-shadow: 0 16px 36px rgba(10, 24, 40, 0.16);
+            backdrop-filter: blur(10px);
+        }
+
+        .news-shell:hover {
+            transform: none;
+        }
+
+        .news-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 16px;
+        }
+
+        .news-heading h2 {
+            margin: 0;
+            font-size: clamp(1.75rem, 3vw, 2.45rem);
+            text-align: left;
+        }
+
+        .news-heading p {
+            max-width: 620px;
+            margin: 0;
+            text-align: right;
+            font-size: 0.98rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+            gap: 14px;
+        }
+
+        .news-card {
+            display: grid;
+            grid-template-rows: clamp(140px, 18vw, 190px) auto;
+            overflow: hidden;
+            border: 5px double rgba(16, 59, 102, 0.7);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 10px 24px rgba(10, 24, 40, 0.12);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 18px 34px rgba(10, 24, 40, 0.18);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: rgba(16, 59, 102, 0.08);
+        }
+
+        .news-card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 12px 14px 14px;
+        }
+
+        .news-date {
+            display: block;
+            margin-bottom: 6px;
+            color: #6c7a86;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .news-card-body h3 {
+            margin: 0 0 6px;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent-gold);
+            color: var(--accent-blue);
+            font-size: 1.08rem;
+            line-height: 1.2;
+        }
+
+        .news-card-body p {
+            display: -webkit-box;
+            margin: 0;
+            overflow: hidden;
+            color: var(--ink-soft);
+            font-size: 0.92rem;
+            line-height: 1.45;
+            text-align: left;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .empty-news {
+            grid-column: 1 / -1;
+            padding: 34px;
+            border: 1px dashed rgba(16, 59, 102, 0.34);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.76);
+            text-align: center;
+            color: var(--ink-soft);
+        }
+
+        .admin-float {
+            position: fixed;
+            right: clamp(12px, 3vw, 28px);
+            bottom: clamp(12px, 3vw, 28px);
+            z-index: 900;
+            border: 0;
+            border-radius: 999px;
+            padding: 13px 20px;
+            background: var(--accent-blue);
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(10, 24, 40, 0.32);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .admin-float:hover {
+            transform: translateY(-2px);
+            background: var(--accent-gold);
+            color: #132338;
+        }
+
+        .login-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            background: rgba(6, 18, 32, 0.58);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.22s ease, visibility 0.22s ease;
+        }
+
+        .login-modal.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-box {
+            width: min(100%, 390px);
+            padding: clamp(20px, 5vw, 28px);
+            border: 1px solid rgba(117, 207, 239, 0.32);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+        }
+
+        .login-box h2 {
+            margin: 0 0 8px;
+            color: var(--accent-blue);
+            text-align: center;
+            font-size: clamp(1.7rem, 7vw, 2rem);
+        }
+
+        .login-box p {
+            margin: 0 0 20px;
+            text-align: center;
+        }
+
+        .login-field {
+            display: grid;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .login-field label {
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 2px solid #d8e0e8;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        .login-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .login-actions button {
+            flex: 1;
+            padding: 11px 14px;
+            border: 0;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .login-submit {
+            background: var(--accent-blue);
+            color: #fff;
+        }
+
+        .login-cancel {
+            background: #e7edf3;
+            color: var(--accent-blue);
+        }
+
+        .login-feedback {
+            min-height: 20px;
+            margin-top: 12px;
+            color: #b3261e;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            body.news-page main {
+                padding: 18px 0 8px;
+            }
+
+            .news-shell {
+                padding: 14px;
+            }
+
+            .news-heading {
+                display: block;
+            }
+
+            .news-heading p {
+                margin-top: 8px;
+                text-align: left;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-card {
+                grid-template-rows: clamp(160px, 48vw, 220px) auto;
+            }
+
+            .admin-float {
+                right: 18px;
+                bottom: 18px;
+                padding: 12px 16px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .login-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="news-page">
+    <header>
+        <div class="container header-container">
+            <div class="brand">
+                <img src="logon3.png" width="120" height="120" loading="eager" decoding="sync" fetchpriority="high" alt="Logo del colegio" class="logo">
+                <h1>E.E.S.T N&ordm;3 "Islas Malvinas"</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="galeria.html">Galer&iacute;a</a></li>
+                    <li><a href="noticias.html" class="is-active">Noticias</a></li>
+                    <li><a href="CONTACTO.HTML">Contacto</a></li>
+                    <li><a href="d1.html">Centro de Estudiantes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="noticias" class="news-shell">
+            <div class="news-heading">
+                <h2>Noticias</h2>
+                <p>Publicaciones institucionales, actividades y novedades de la comunidad educativa.</p>
+            </div>
+            <div class="news-grid" id="newsGrid"></div>
+        </section>
+    </main>
+
+    <button class="admin-float" id="openLogin" type="button">Administrar noticias</button>
+
+    <div class="login-modal" id="loginModal" aria-hidden="true">
+        <form class="login-box" id="loginForm">
+            <h2>Acceso administrativo</h2>
+            <p>Uso educativo interno para editar las publicaciones.</p>
+            <div class="login-field">
+                <label for="loginUser">Usuario</label>
+                <input id="loginUser" type="text" autocomplete="username" required>
+            </div>
+            <div class="login-field">
+                <label for="loginPass">Contrase&ntilde;a</label>
+                <input id="loginPass" type="password" autocomplete="current-password" required>
+            </div>
+            <div class="login-actions">
+                <button class="login-submit" type="submit">Ingresar</button>
+                <button class="login-cancel" id="closeLogin" type="button">Cancelar</button>
+            </div>
+            <div class="login-feedback" id="loginFeedback"></div>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 E.E.S.T N&ordm;3 "Islas Malvinas" - Remedios de Escalada, Lan&uacute;s</p>
+        <p><em>"Ense&ntilde;amos profesiones, inspiramos personas."</em></p>
+    </footer>
+
+    <script>
+        const NEWS_KEY = 'eest3Noticias';
+        const SESSION_KEY = 'eest3NoticiasAdmin';
+        const ADMIN_USERS = [
+            { user: 'admin', pass: 'Malvinas2026' },
+            { user: 'profesor', pass: 'Tecnica123' }
+        ];
+
+        const defaultNews = [
+            {
+                id: 'actividades',
+                title: 'Actividades institucionales',
+                date: '2026-06-24',
+                body: 'La escuela comparte nuevas propuestas, encuentros y proyectos que fortalecen la participacion de toda la comunidad educativa.',
+                image: 'vide.png',
+                published: true
+            },
+            {
+                id: 'proyectos',
+                title: 'Proyectos de estudiantes',
+                date: '2026-06-23',
+                body: 'Los cursos avanzan con trabajos practicos, producciones digitales y experiencias que integran saberes tecnicos y creatividad.',
+                image: 'perfil.png',
+                published: true
+            },
+            {
+                id: 'aprendizaje',
+                title: 'Espacios de aprendizaje',
+                date: '2026-06-22',
+                body: 'Las aulas y talleres siguen siendo lugares de encuentro para aprender, experimentar y preparar nuevas actividades escolares.',
+                image: 'ricardito.png',
+                published: true
+            },
+            {
+                id: 'comunidad',
+                title: 'Comunidad Islas Malvinas',
+                date: '2026-06-21',
+                body: 'Docentes y estudiantes impulsan iniciativas que promueven compromiso, companerismo y participacion dentro de la institucion.',
+                image: 'moria.png',
+                published: true
+            }
+        ];
+
+        const readNews = () => {
+            try {
+                const stored = JSON.parse(localStorage.getItem(NEWS_KEY));
+                return Array.isArray(stored) ? stored : defaultNews;
+            } catch {
+                return defaultNews;
+            }
+        };
+
+        const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[char]));
+
+        const formatDate = (value) => {
+            if (!value) return '';
+            const parts = value.split('-');
+            return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : value;
+        };
+
+        const renderNews = () => {
+            const grid = document.getElementById('newsGrid');
+            const news = readNews().filter((item) => item.published);
+
+            if (!news.length) {
+                grid.innerHTML = '<div class="empty-news">Todav&iacute;a no hay publicaciones visibles.</div>';
+                return;
+            }
+
+            grid.innerHTML = news.map((item) => `
+                <article class="news-card">
+                    <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}">
+                    <div class="news-card-body">
+                        <span class="news-date">${escapeHtml(formatDate(item.date))}</span>
+                        <h3>${escapeHtml(item.title)}</h3>
+                        <p>${escapeHtml(item.body)}</p>
+                    </div>
+                </article>
+            `).join('');
+        };
+
+        const modal = document.getElementById('loginModal');
+        const openLogin = document.getElementById('openLogin');
+        const closeLogin = document.getElementById('closeLogin');
+        const loginForm = document.getElementById('loginForm');
+        const loginFeedback = document.getElementById('loginFeedback');
+
+        const openModal = () => {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('loginUser').focus();
+        };
+
+        const closeModal = () => {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            loginFeedback.textContent = '';
+            loginForm.reset();
+        };
+
+        openLogin.addEventListener('click', () => {
+            if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+                window.location.href = 'noticias-admin.html';
+                return;
+            }
+
+            openModal();
+        });
+
+        closeLogin.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            const isValid = ADMIN_USERS.some((account) => account.user === user && account.pass === pass);
+
+            if (!isValid) {
+                loginFeedback.textContent = 'Usuario o contrasena incorrectos.';
+                return;
+            }
+
+            sessionStorage.setItem(SESSION_KEY, 'true');
+            window.location.href = 'noticias-admin.html';
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+
+        renderNews();
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#a8d8e6;
+
+    min-height:100vh;
+}
+
+/* =========================
+   BARRA SUPERIOR
+========================= */
+
+.barra-superior{
+
+    width:99%;
+
+    height:80px;
+
+    background:#4045d9;
+
+    border:5px solid black;
+
+    margin:10px auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+.navegacion{
+
+    display:flex;
+
+    gap:50px;
+}
+
+.navegacion a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    transition:0.2s;
+}
+
+.navegacion a:hover{
+
+    transform:scale(1.08);
+
+    opacity:0.8;
+}
+
+/* =========================
+   CONTENEDOR PUBLICACIONES
+========================= */
+
+.contenedor-publicaciones{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:40px;
+
+    padding:25px;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.card{
+
+    width:350px;
+
+    height:260px;
+
+    background:#ececec;
+
+    border:5px solid black;
+
+    border-radius:20px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+
+    cursor:pointer;
+}
+
+/* =========================
+   BOTÓN PUBLICAR
+========================= */
+
+.publicar-card{
+
+    text-decoration:none;
+
+    color:black;
+}
+
+.simbolo-mas{
+
+    font-size:120px;
+
+    transition:0.3s;
+}
+
+.texto-hover{
+
+    position:absolute;
+
+    opacity:0;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.publicar-card:hover .simbolo-mas{
+
+    opacity:0;
+}
+
+.publicar-card:hover .texto-hover{
+
+    opacity:1;
+}
+
+/* =========================
+   PUBLICACIONES
+========================= */
+
+.publicacion{
+
+    text-decoration:none;
+
+    color:black;
+}
+
+.titulo-publicacion{
+
+    font-size:30px;
+
+    transition:0.3s;
+}
+
+.hover-ir{
+
+    position:absolute;
+
+    opacity:0;
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.publicacion:hover .titulo-publicacion{
+
+    opacity:0;
+}
+
+.publicacion:hover .hover-ir{
+
+    opacity:1;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .contenedor-publicaciones{
+
+        justify-content:center;
+    }
+
+    .navegacion{
+
+        gap:20px;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .navegacion a{
+
+        font-size:18px;
+    }
+}

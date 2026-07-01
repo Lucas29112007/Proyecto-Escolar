@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Realizar Publicación</title>
+
+    <link rel="stylesheet" href="c3.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         CONTENEDOR PRINCIPAL
+    ========================== -->
+
+    <main class="contenedor-formulario">
+
+        <section class="formulario-publicacion">
+
+            <!-- =========================
+                 TÍTULO
+            ========================== -->
+
+            <input
+                type="text"
+                class="input-titulo"
+                placeholder="titulo"
+            >
+
+            <!-- =========================
+                 EDITOR
+            ========================== -->
+
+            <div class="editor">
+
+                <!-- BARRA HERRAMIENTAS -->
+
+                <div class="toolbar">
+
+                    <!-- NEGRITA -->
+
+                    <button onclick="document.execCommand('bold')">
+
+                        <b>B</b>
+
+                    </button>
+
+                    <!-- CURSIVA -->
+
+                    <button onclick="document.execCommand('italic')">
+
+                        <i>I</i>
+
+                    </button>
+
+                    <!-- SUBRAYADO -->
+
+                    <button onclick="document.execCommand('underline')">
+
+                        <u>U</u>
+
+                    </button>
+
+                    <!-- VIÑETAS -->
+
+                    <button onclick="document.execCommand('insertUnorderedList')">
+
+                        V
+
+                    </button>
+
+                    <!-- QUITAR FORMATO -->
+
+                    <button onclick="document.execCommand('removeFormat')">
+
+                        T✖
+
+                    </button>
+
+                    <!-- ARCHIVOS -->
+
+                    <label class="archivo-btn">
+
+                        📎
+
+                        <input
+                            type="file"
+                            hidden
+                        >
+
+                    </label>
+
+                    <!-- LINK -->
+
+                    <button onclick="agregarLink()">
+
+                        🔗
+
+                    </button>
+
+                </div>
+
+                <!-- ÁREA EDITABLE -->
+
+                <div
+                    class="contenido-editor"
+                    contenteditable="true"
+                >
+                    contenido...
+                </div>
+
+            </div>
+
+            <!-- =========================
+                 BOTONES
+            ========================== -->
+
+            <div class="acciones">
+
+                <!-- PUBLICAR -->
+
+                <a href="c2.html" class="btn publicar">
+
+                    Publicar
+
+                </a>
+
+                <!-- DESCARTAR -->
+
+                <a href="c2.html" class="btn descartar">
+
+                    Descartar
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="c3.js"></script>
+
+</body>
+
+</html>
